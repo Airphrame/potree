@@ -84,7 +84,7 @@ float numberOfOnes(float number, float index){
 	float tmp = mod(number, pow(2.0, index + 1.0));
 	float numOnes = 0.0;
 	for(float i = 0.0; i < 8.0; i++){
-		if(mod(tmp, 2.0) != 0.0){
+		if(mod(tmp, 2.0) > 0.5){
 			numOnes++;
 		}
 		tmp = floor(tmp / 2.0);
@@ -99,7 +99,7 @@ float numberOfOnes(float number, float index){
  *
  */
 bool isBitSet(float number, float index){
-	return mod(floor(number / pow(2.0, index)), 2.0) != 0.0;
+	return mod(floor(number / pow(2.0, index)), 2.0) > 0.5;
 }
 
 
