@@ -201,12 +201,10 @@ Potree.PointCloudOctree.prototype.updateMaterial = function(material, vn, camera
 	material.far = camera.far;
 	material.uniforms.octreeSize.value = this.pcoGeometry.boundingBox.size().x;
 	
-	if(material.pointSizeType){
-		if(material.pointSizeType === Potree.PointSizeType.ADAPTIVE 
-			|| material.pointColorType === Potree.PointColorType.OCTREE_DEPTH){
-			
-			this.updateVisibilityTexture(material, vn);
-		}
+	if(material.pointSizeType === Potree.PointSizeType.ADAPTIVE 
+		|| material.pointColorType === Potree.PointColorType.TREE_DEPTH){
+		
+		this.updateVisibilityTexture(material, vn);
 	}
 };
 
