@@ -178,10 +178,10 @@ Potree.Shaders["pointcloud.vs"] = [
  "		float index = 4.0*index3d.x + 2.0*index3d.y + index3d.z;",
  "		",
  "		vec4 value = texture2D(visibleNodes, vec2(iOffset / 2048.0, 0.0));",
- "		float mask = floor(value.r * 256.0 + 0.5);",
+ "		float mask = floor(value.r * 255.0 + 0.5);",
  "		if(isBitSet(mask, index)){",
  "			// there are more visible child nodes at this position",
- "			iOffset = iOffset + floor(value.g * 256.0 + 0.5) + numberOfOnes(mask, index - 1.0);",
+ "			iOffset = iOffset + floor(value.g * 255.0 + 0.5) + numberOfOnes(mask, index - 1.0);",
  "			depth++;",
  "		}else{",
  "			// no more visible child nodes at this position",
@@ -3910,12 +3910,10 @@ Potree.PointCloudOctree.prototype.updateMaterial = function(material, vn, camera
 	material.far = camera.far;
 	material.uniforms.octreeSize.value = this.pcoGeometry.boundingBox.size().x;
 	
-	if(material.pointSizeType){
-		if(material.pointSizeType === Potree.PointSizeType.ADAPTIVE 
-			|| material.pointColorType === Potree.PointColorType.OCTREE_DEPTH){
-			
-			this.updateVisibilityTexture(material, vn);
-		}
+	if(material.pointSizeType === Potree.PointSizeType.ADAPTIVE 
+		|| material.pointColorType === Potree.PointColorType.TREE_DEPTH){
+		
+		this.updateVisibilityTexture(material, vn);
 	}
 };
 
